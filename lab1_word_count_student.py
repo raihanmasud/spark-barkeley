@@ -32,7 +32,6 @@ print type(wordsRDD)
 
 # In[2]:
 
-# TODO: Replace <FILL IN> with appropriate code
 def makePlural(word):
     """Adds an 's' to `word`.
 
@@ -75,7 +74,6 @@ Test.assertEquals(makePlural('rat'), 'rats', 'incorrect result: makePlural does 
 
 # In[5]:
 
-# TODO: Replace <FILL IN> with appropriate code
 pluralRDD = wordsRDD.map(makePlural)
 print pluralRDD.collect()
 
@@ -92,7 +90,6 @@ Test.assertEquals(pluralRDD.collect(), ['cats', 'elephants', 'rats', 'rats', 'ca
 
 # In[6]:
 
-# TODO: Replace <FILL IN> with appropriate code
 pluralLambdaRDD = wordsRDD.map(lambda x : x+'s')
 print pluralLambdaRDD.collect()
 
@@ -109,7 +106,6 @@ Test.assertEquals(pluralLambdaRDD.collect(), ['cats', 'elephants', 'rats', 'rats
 
 # In[8]:
 
-# TODO: Replace <FILL IN> with appropriate code
 pluralLengths = (pluralRDD
                  .map(lambda x: len(x))
                  .collect())
@@ -129,7 +125,6 @@ Test.assertEquals(pluralLengths, [4, 9, 4, 4, 4],
 
 # In[11]:
 
-# TODO: Replace <FILL IN> with appropriate code
 wordPairs = wordsRDD.map(lambda x: (x,1))
 print wordPairs.collect()
 
@@ -156,7 +151,6 @@ Test.assertEquals(wordPairs.collect(),
 
 # In[18]:
 
-# TODO: Replace <FILL IN> with appropriate code
 # Note that groupByKey requires no parameters
 wordsGrouped = wordPairs.groupByKey()
 for key, value in wordsGrouped.collect():
@@ -178,7 +172,6 @@ Test.assertEquals(sorted(wordsGrouped.mapValues(lambda x: list(x)).collect()),
 
 # In[21]:
 
-# TODO: Replace <FILL IN> with appropriate code
 wordCountsGrouped = wordsGrouped.map(lambda x : (x[0], sum(x[1]) ))
 print wordCountsGrouped.collect()
 
@@ -196,7 +189,6 @@ Test.assertEquals(sorted(wordCountsGrouped.collect()),
 
 # In[24]:
 
-# TODO: Replace <FILL IN> with appropriate code
 # Note that reduceByKey takes in a function that accepts two values and returns a single value
 from operator import add
 wordCounts = wordPairs.reduceByKey(add)
@@ -236,7 +228,6 @@ Test.assertEquals(sorted(wordCountsCollected), [('cat', 2), ('elephant', 1), ('r
 
 # In[28]:
 
-# TODO: Replace <FILL IN> with appropriate code
 uniqueWords = wordsRDD.distinct().count()
 print uniqueWords
 
@@ -253,7 +244,6 @@ Test.assertEquals(uniqueWords, 3, 'incorrect count of uniqueWords')
 
 # In[31]:
 
-# TODO: Replace <FILL IN> with appropriate code
 from operator import add
 totalCount = (wordCounts
               .map(lambda x : x[1])
@@ -278,7 +268,6 @@ Test.assertEquals(round(average, 2), 1.67, 'incorrect value of average')
 
 # In[33]:
 
-# TODO: Replace <FILL IN> with appropriate code
 def wordCount(wordListRDD):
     """Creates a pair RDD with word counts from an RDD of words.
 
@@ -311,7 +300,6 @@ Test.assertEquals(sorted(wordCount(wordsRDD).collect()),
 
 # In[35]:
 
-# TODO: Replace <FILL IN> with appropriate code
 import re
 import string
 def removePunctuation(text):
@@ -371,7 +359,6 @@ print '\n'.join(shakespeareRDD
 
 # In[71]:
 
-# TODO: Replace <FILL IN> with appropriate code
 
 shakespeareWordsRDD = shakespeareRDD.flatMap(lambda x : x.split('\n')).flatMap(lambda x : x.split(' '))
 shakespeareWordCount = shakespeareWordsRDD.count()
@@ -396,7 +383,6 @@ Test.assertEquals(shakespeareWordsRDD.top(5),
 
 # In[74]:
 
-# TODO: Replace <FILL IN> with appropriate code
 shakeWordsRDD = shakespeareWordsRDD.filter(lambda x : x != '')
 shakeWordCount = shakeWordsRDD.count()
 print shakeWordCount
@@ -415,7 +401,6 @@ Test.assertEquals(shakeWordCount, 882996, 'incorrect value for shakeWordCount')
 
 # In[90]:
 
-# TODO: Replace <FILL IN> with appropriate code
 top15WordsAndCounts =  wordCount(shakeWordsRDD).takeOrdered(15, key=lambda x: -x[1])
 print '\n'.join(map(lambda (w, c): '{0}: {1}'.format(w, c), top15WordsAndCounts))
 
