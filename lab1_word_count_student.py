@@ -207,7 +207,6 @@ Test.assertEquals(sorted(wordCounts.collect()), [('cat', 2), ('elephant', 1), ('
 
 # In[26]:
 
-# TODO: Replace <FILL IN> with appropriate code
 wordCountsCollected = (wordsRDD
                        .map(lambda x: (x,1)).reduceByKey(add)
                        .collect())
